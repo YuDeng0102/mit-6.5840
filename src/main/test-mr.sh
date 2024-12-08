@@ -139,6 +139,7 @@ else
   echo '---' indexer output is not the same as mr-correct-indexer.txt
   echo '---' indexer test: FAIL
   failed_any=1
+  exit 1
 fi
 
 wait
@@ -169,6 +170,7 @@ else
   echo '---' map workers did not run in parallel
   echo '---' map parallelism test: FAIL
   failed_any=1
+  exit 1
 fi
 
 wait
