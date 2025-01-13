@@ -361,7 +361,7 @@ func (cfg *config) connect(i int) {
 	// fmt.Printf("connect(%d)\n", i)
 
 	cfg.connected[i] = true
-	DPrintf("attach server %v to the net.", i)
+	DPrintf("attach server %v to the net,currentTerm.", i)
 
 	// outgoing ClientEnds
 	for j := 0; j < cfg.n; j++ {
@@ -385,7 +385,7 @@ func (cfg *config) disconnect(i int) {
 	// fmt.Printf("disconnect(%d)\n", i)
 
 	cfg.connected[i] = false
-	DPrintf("detach  server %v to the net.", i)
+	DPrintf("detach server %v to the net.", i)
 	// outgoing ClientEnds
 	for j := 0; j < cfg.n; j++ {
 		if cfg.endnames[i] != nil {
@@ -432,11 +432,11 @@ func (cfg *config) checkOneLeader() int {
 	for iters := 0; iters < 10; iters++ {
 		ms := 450 + (rand.Int63() % 100)
 		time.Sleep(time.Duration(ms) * time.Millisecond)
-		DPrintf("iter %v:", iters)
+		// DPrintf("iter %v:", iters)
 
 		leaders := make(map[int][]int)
 		for i := 0; i < cfg.n; i++ {
-			DPrintf("get %v client's state:", i)
+			// DPrintf("get %v client's state:", i)
 			if cfg.connected[i] {
 				if term, leader := cfg.rafts[i].GetState(); leader {
 					leaders[term] = append(leaders[term], i)
@@ -588,6 +588,7 @@ func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 			t1 := time.Now()
 			for time.Since(t1).Seconds() < 2 {
 				nd, cmd1 := cfg.nCommitted(index)
+				// DPrintf("nd:%v,cmd1 %v,cmd %v", nd, cmd1, cmd)
 				if nd > 0 && nd >= expectedServers {
 					// committed
 					if cmd1 == cmd {
