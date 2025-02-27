@@ -499,7 +499,7 @@ func TestBackup3B(t *testing.T) {
 	servers := 5
 	cfg := make_config(t, servers, false, false)
 	defer cfg.cleanup()
-	base := 3
+	base := 50
 
 	cfg.begin("Test (3B): leader backs up quickly over incorrect follower logs")
 
@@ -883,7 +883,7 @@ func TestUnreliableAgree3C(t *testing.T) {
 		}
 		cfg.one(iters, 1, true)
 	}
-
+	DPrintf("network become unreliable")
 	cfg.setunreliable(false)
 
 	wg.Wait()

@@ -13,7 +13,7 @@ do
     echo "Running test iteration $i of $max_tests..."
     
     # 运行 go 测试命令
-     go test -v -run Backup3B &> output3B.log
+    go test -v -run 3C &> output3C.log
     # go test -v -run 3A &> output3A.log
     # 检查 go 命令的退出状态
     if [ "$?" -eq 0 ]; then
