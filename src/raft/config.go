@@ -561,6 +561,7 @@ func (cfg *config) wait(index int, n int, startTerm int) interface{} {
 // to simplify the early Lab 3B tests.
 func (cfg *config) one(cmd interface{}, expectedServers int, retry bool) int {
 	t0 := time.Now()
+	DPrintf("start check one cmd %v", cmd)
 	starts := 0
 	for time.Since(t0).Seconds() < 10 && cfg.checkFinished() == false {
 		// try all the servers, maybe one is the leader.
